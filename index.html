@@ -720,6 +720,8 @@
     <div class="body">
       <div class="strip-dim">Tap everything you'd happily eat. Two or more.</div>
       <div id="protein-chips"></div>
+      <div class="strip-dim" style="margin-top:6px">Optional: how do you usually do breakfast?</div>
+      <div id="breakfast-chips"></div>
       <button class="cta" onclick="buildProteinDay(true)">Show me my protein day</button>
       <div id="protein-day"></div>
       <button class="cta-outline" onclick="go(23)">See full sample days at my calories</button>
@@ -2497,6 +2499,7 @@ function buildProteinScreen() {
     };
     wrap.appendChild(b);
   });
+  buildBreakfastChips();
   const out = document.getElementById('protein-day');
   out.innerHTML = '';
   if (proteinPicks.length >= 2 && getTargets()) buildProteinDay(false);
@@ -2520,20 +2523,93 @@ function portionProtein(f, n) {
   if (f.unit === 'each') return n * f.p;
   return (Math.round(f.size * n / 5) * 5) * (f.p / f.size);
 }
-function planSlot(slot, target, picks, used) {
-  const pool = picks.filter(f => f.slots.includes(slot)).sort((a, b) => (used.has(a.id) ? 1 : 0) - (used.has(b.id) ? 1 : 0));
-  const items = []; let got = 0;
-  for (const f of pool) {
-    if (got >= target * 0.88) break;
-    const n = portionCount(f, target - got, items.length === 0);
-    if (!n) continue;
-    const p = portionProtein(f, n);
-    items.push({ text: portionText(f, n), p: Math.round(p) });
-    got += p; used.add(f.id);
-    if (items.length >= 2) break;
-  }
-  return { items, got };
+// Meal ideas built from the foods the person picked. Extras are carbs, veg and fats with their approximate protein.
+const BREAKFAST_PREFS = [['oats', 'Oats or yogurt'], ['eggs', 'Eggs or toast'], ['quick', 'Shake or something quick'], ['none', 'I do not usually eat breakfast']];
+const MEALS = {
+  breakfast: [
+    { id:'b-oats', pref:'oats', name:'Protein oats with berries', main:['whey'], fixed:true, extras:[['40g porridge oats',5],['200ml semi-skimmed milk, or your usual milk',7],['a handful of berries',0]] },
+    { id:'b-yog', pref:'oats', name:'Greek yogurt bowl with oats and fruit', main:['yogurt','skyr'], extras:[['30g oats or low-sugar granola',4],['a sliced banana or a handful of berries',1]] },
+    { id:'b-egg', pref:'eggs', name:'Eggs on toast', main:['eggs'], extras:[['2 slices wholemeal toast',8],['grilled tomatoes or spinach',1]] },
+    { id:'b-cot', pref:'eggs', name:'Cottage cheese or ham on toast', main:['cottage','ham'], extras:[['2 slices wholemeal toast',8],['sliced tomato and cucumber',0]] },
+    { id:'b-tofu', pref:'eggs', name:'Tofu scramble on toast', main:['tofu'], extras:[['2 slices wholemeal toast',8],['spinach or mushrooms',1]] },
+    { id:'b-smooth', pref:'quick', name:'Banana protein smoothie', main:['whey'], fixed:true, extras:[['1 banana',1],['200ml milk, or your usual milk',7]] },
+    { id:'b-skyr', pref:'quick', name:'Skyr with fruit and honey', main:['skyr','yogurt'], extras:[['berries or a chopped apple',0],['1 teaspoon honey',0]] }
+  ],
+  lunch: [
+    { id:'l-wrap', name:'Chicken wrap with salad', main:['chicken'], extras:[['1 large wholemeal wrap',5],['salad and a light dressing',1]], alt:'Prefer potatoes? Swap the wrap for a jacket potato.' },
+    { id:'l-tuna', name:'Tuna jacket potato', main:['tuna'], extras:[['1 medium jacket potato',5],['salad, and a spoon of Greek yogurt or light mayo',1]] },
+    { id:'l-prawn', name:'Prawn and rice salad bowl', main:['prawns'], extras:[['150g cooked rice',4],['cucumber, peppers and a lime dressing',1]] },
+    { id:'l-cot', name:'Cottage cheese plate', main:['cottage'], extras:[['4 wholegrain crackers or 2 rice cakes',3],['tomatoes, cucumber and olives',1]] },
+    { id:'l-salm', name:'Salmon and potato salad', main:['salmon'], extras:[['150g new potatoes',3],['leaves and a lemon dressing',1]] },
+    { id:'l-sand', name:'Egg or ham sandwich with salad', main:['eggs','ham'], extras:[['2 slices wholemeal bread',8],['salad and a little light mayo or mustard',1]] },
+    { id:'l-tofu', name:'Tofu noodle bowl', main:['tofu'], extras:[['150g cooked noodles',5],['stir-fry vegetables and soy sauce',2]] },
+    { id:'l-quorn', name:'Quorn wrap with salad', main:['quorn'], extras:[['1 large wholemeal wrap',5],['salad and a light dressing',1]] },
+    { id:'l-lent', name:'Lentil and vegetable soup with bread', main:['lentils'], extras:[['1 slice wholemeal bread',4],['vegetables and stock',2]] }
+  ],
+  dinner: [
+    { id:'d-chilli', name:'Chilli with rice', main:['turkey','beef'], extras:[['80g kidney beans',6],['chopped tomatoes, onion and peppers',2],['150g cooked rice',4]] },
+    { id:'d-stir', name:'Stir-fry with noodles', main:['chicken','prawns'], extras:[['150g cooked noodles',5],['stir-fry vegetables and soy sauce',2]] },
+    { id:'d-salm', name:'Salmon with potatoes and greens', main:['salmon'], extras:[['200g potatoes',4],['broccoli or green beans',3]] },
+    { id:'d-fish', name:'Baked white fish with potatoes and peas', main:['fish'], extras:[['200g potatoes',4],['80g peas',4]] },
+    { id:'d-steak', name:'Steak with sweet potato and veg', main:['steak'], extras:[['1 medium sweet potato',2],['green veg or salad',2]] },
+    { id:'d-bol', name:'Bolognese with pasta', main:['beef','turkey'], extras:[['75g dry pasta',9],['tomato sauce, onion and veg',2]] },
+    { id:'d-curry', name:'Tofu or Quorn curry with rice', main:['tofu','quorn'], extras:[['150g cooked rice',4],['tomato curry sauce and vegetables',3]] },
+    { id:'d-lent', name:'Lentil and vegetable curry with rice', main:['lentils'], extras:[['150g cooked rice',4],['tomato curry sauce and vegetables',3]] },
+    { id:'d-trayb', name:'Chicken and vegetable traybake', main:['chicken'], extras:[['250g potatoes',5],['roasted vegetables',3]] }
+  ],
+  snack: [
+    { id:'s-yog', name:'Greek yogurt and berries', main:['yogurt'], lines:['150g Greek yogurt (0% fat)','a handful of berries'], p:15 },
+    { id:'s-skyr', name:'Skyr and fruit', main:['skyr'], lines:['150g skyr','a piece of fruit'], p:17 },
+    { id:'s-shake', name:'Protein shake', main:['whey'], lines:['1 scoop of whey protein, mixed with water or milk'], p:24 },
+    { id:'s-egg', name:'Boiled eggs and an apple', main:['eggs'], lines:['2 boiled eggs','an apple'], p:14 },
+    { id:'s-cot', name:'Cottage cheese on rice cakes', main:['cottage'], lines:['100g cottage cheese','2 rice cakes'], p:13 },
+    { id:'s-ham', name:'Ham roll-ups with cucumber', main:['ham'], lines:['80g lean ham or turkey slices','cucumber sticks'], p:14 }
+  ]
+};
+let breakfastPref = readKey('fll_protbreakfast', '');
+let protOffsets = { breakfast:0, lunch:0, dinner:0, snack:0 };
+function buildBreakfastChips() {
+  const wrap = document.getElementById('breakfast-chips'); if (!wrap) return;
+  wrap.innerHTML = '';
+  BREAKFAST_PREFS.forEach(([k, label]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip' + (breakfastPref === k ? ' sel' : ''); b.textContent = label;
+    b.onclick = () => { breakfastPref = (breakfastPref === k) ? '' : k; saveKey('fll_protbreakfast', breakfastPref); protOffsets.breakfast = 0; buildBreakfastChips(); };
+    wrap.appendChild(b);
+  });
 }
+function mainFood(meal, picks) {
+  for (const id of meal.main) { const f = picks.find(x => x.id === id); if (f) return f; }
+  return null;
+}
+function eligibleMeals(slot, picks) {
+  let list = MEALS[slot].filter(m => mainFood(m, picks));
+  if (slot === 'breakfast' && breakfastPref) {
+    const want = breakfastPref === 'none' ? 'quick' : breakfastPref;
+    const pref = list.filter(m => m.pref === want);
+    if (pref.length) list = pref;
+  }
+  return list;
+}
+function chooseMeal(slot, picks, usedMain, target) {
+  let list = eligibleMeals(slot, picks);
+  if (!list.length) return null;
+  if (slot === 'snack') list = list.slice().sort((a, b) => Math.abs(a.p - target) - Math.abs(b.p - target)).slice(0, 3);
+  const start = ((protOffsets[slot] % list.length) + list.length) % list.length;
+  const rotated = list.slice(start).concat(list.slice(0, start));
+  return rotated.find(m => !usedMain.has(mainFood(m, picks).id)) || rotated[0];
+}
+function renderMeal(meal, picks, target) {
+  if (meal.p) return { name: meal.name, lines: meal.lines, protein: meal.p, alt: meal.alt || '' };
+  const f = mainFood(meal, picks);
+  const extrasP = meal.extras.reduce((a, e) => a + e[1], 0);
+  let n = 1;
+  if (!meal.fixed) n = portionCount(f, Math.max(target - extrasP, f.p * 0.5), true);
+  const mainP = Math.round(portionProtein(f, n));
+  return { name: meal.name, lines: [portionText(f, n)].concat(meal.extras.map(e => e[0])), protein: mainP + extrasP, alt: meal.alt || '', foodId: f.id };
+}
+function swapProtMeal(slot) { protOffsets[slot]++; buildProteinDay(false); }
+function anotherProtDay() { ['breakfast', 'lunch', 'dinner', 'snack'].forEach(k => protOffsets[k]++); buildProteinDay(false); }
 function buildProteinDay(scroll) {
   const out = document.getElementById('protein-day');
   if (!out) return;
@@ -2542,31 +2618,36 @@ function buildProteinDay(scroll) {
   const picks = PROTEIN_FOODS.filter(f => proteinPicks.includes(f.id));
   if (picks.length < 2) { out.innerHTML = `<div class="strip-red">Pick at least two foods you'd actually eat.</div>`; return; }
   const T = t.protMid;
-  const slots = [['breakfast', 'Breakfast', 0.25], ['lunch', 'Lunch', 0.30], ['dinner', 'Dinner', 0.35], ['snack', 'Snack', 0.10]];
-  const used = new Set(); let total = 0;
-  let html = `<div class="week-card" style="border-color:rgba(201,168,76,0.3)"><div class="week-label">Your protein day</div><div class="week-title">${T}g, built from foods you chose</div><div class="week-desc">One way to hit it. Swap any protein for another from your list, keeping the grams of protein similar.</div></div>`;
+  const slots = [['breakfast', breakfastPref === 'none' ? 'First meal of the day' : 'Breakfast', 0.26], ['lunch', 'Lunch', 0.31], ['dinner', 'Dinner', 0.33], ['snack', 'Optional snack', 0.10]];
+  const usedMain = new Set(); let total = 0; const empty = [];
+  let cards = '';
   slots.forEach(([key, label, share]) => {
     const target = Math.round(T * share);
-    const r = planSlot(key, target, picks, used);
-    total += r.got;
-    const lines = r.items.length
-      ? r.items.map(i => `<div class="meal-line">• ${esc(i.text)} <span style="color:var(--gold)">· ${i.p}g protein</span></div>`).join('')
-      : `<div class="meal-line">Nothing on your list suits ${label.toLowerCase()}. Try eggs, yogurt or a shake.</div>`;
-    html += `<div class="week-card"><div class="week-label">${label} · aim for about ${target}g</div>${lines}</div>`;
+    const meal = chooseMeal(key, picks, usedMain, target);
+    if (!meal) { empty.push(label.toLowerCase()); cards += `<div class="week-card"><div class="week-label">${label}</div><div class="meal-line">Nothing on your list suits this meal yet. Add a food or two above.</div></div>`; return; }
+    const r = renderMeal(meal, picks, target);
+    const f = mainFood(meal, picks); if (key !== 'snack') usedMain.add(f.id);
+    total += r.protein;
+    cards += `<div class="week-card"><div class="week-label">${label}</div><div class="week-title" style="font-size:16px;margin-bottom:4px">${esc(r.name)}</div>` +
+      r.lines.map(l => `<div class="meal-line">• ${esc(l)}</div>`).join('') +
+      `<div class="meal-line" style="color:var(--gold)">About ${r.protein}g protein</div>` +
+      (r.alt ? `<div class="meal-line" style="font-size:12px">${esc(r.alt)}</div>` : '') +
+      `<button type="button" class="cta-outline" style="margin-top:8px;padding:8px" onclick="swapProtMeal('${key}')">Swap this meal</button></div>`;
   });
   total = Math.round(total);
-  const emptySlots = slots.filter(([key]) => !planSlot(key, 1, picks, new Set()).items.length).map(x => x[1].toLowerCase());
   const short = Math.round(T - total);
-  const verdict = emptySlots.length
-    ? `Not a full day yet. Nothing on your list suits ${emptySlots.join(' or ')}. Add a food or two so every meal has a protein.`
+  const verdict = empty.length
+    ? `Not a full day yet. Nothing on your list suits ${empty.join(' or ')}. Add a food or two so every meal has a protein.`
     : total > T * 1.2
-    ? `That comes to about ${total}g, a bit over ${T}g. Fine for protein, but trim a portion if your calories get tight.`
+    ? `Over your target by about ${total - T}g. That is fine for protein. If calories get tight, make a portion smaller or skip the optional snack.`
     : total >= T * 0.9
-      ? `That comes to about ${total}g. Right on target.`
+      ? `Right on target.`
       : short > T * 0.25
-        ? `That comes to about ${total}g, ${short}g short of ${T}g. Your list is not enough for a full day yet. Pick more foods, or add a shake.`
-        : `That comes to about ${total}g, ${short}g short of ${T}g. Add a shake, or a bigger portion at dinner.`;
-  html += `<div class="strip"><strong style="color:var(--text);display:block;margin-bottom:4px">${verdict}</strong>Portions are approximate. Check labels, and weigh your own.</div>`;
+        ? `About ${short}g short. Your list is not enough for a full day yet. Pick more foods, or add a shake.`
+        : `About ${short}g short. Add a shake, or a bigger portion at dinner.`;
+  let html = `<div class="week-card" style="border-color:rgba(201,168,76,0.3)"><div class="week-label">Your protein day</div><div class="week-title">Your target: ${T}g protein</div><div class="week-desc">This example provides about <strong style="color:var(--text)">${total}g</strong>. ${verdict}<br><br>It uses the foods you chose. Carbs and fats are in the meals so they look like real food, but this screen only counts protein.</div>` +
+    `<button type="button" class="cta-outline" style="margin-top:10px" onclick="anotherProtDay()">Show me another day</button></div>` + cards;
+  html += `<div class="strip">Portions are approximate. Check labels, and weigh your own. Calories are covered in the sample days.</div>`;
   html += `<div class="week-card"><div class="week-label">Your protein cheat sheet</div>` +
     picks.map(f => `<div class="meal-line">${esc(portionText(f, 1))} <span style="color:var(--gold)">≈ ${f.p}g protein</span></div>`).join('') + `</div>`;
   out.innerHTML = html;
