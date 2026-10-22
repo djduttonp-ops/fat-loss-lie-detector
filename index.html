@@ -255,7 +255,7 @@
     </div>
     <div class="body">
       <div class="strip">Not a diet plan. Not a macro calculator. A lie detector, with receipts.</div>
-      <div class="strip-dim"><strong style="color:var(--text)">Free:</strong> take the audit and see your main pattern. <strong style="color:var(--text)">Full version, £14.99:</strong> your detailed report, starting targets, six-week plan and rescue tools. Your answers stay on your device.</div>
+      <div class="strip-dim"><strong style="color:var(--text)">Free:</strong> take the audit and see your main pattern. <strong style="color:var(--text)">Full version, $14.99 USD, one-time, no subscription:</strong> your detailed report, starting targets, six-week plan and rescue tools. Your answers stay on your device.</div>
       <p class="fine" style="margin:6px 0 0">Educational information, not medical advice. If you have a medical condition, are pregnant, or have a history of disordered eating, speak to your GP before changing your diet or exercise.</p>
       <div class="spacer"></div>
       <button class="cta" onclick="go(1)">Start my free audit</button>
@@ -372,6 +372,7 @@
       <p class="sub" id="mini-result-sub">And we've only just started.</p>
     </div>
     <div class="body">
+      <div class="strip" id="purchase-banner" style="display:none;border-color:var(--gold)"><strong style="color:var(--text);display:block;margin-bottom:4px">Thank you for your purchase</strong>Payhip has emailed your licence key to the address you used at checkout. Check your spam or promotions folder if it is not there yet. Paste the key into the box at the bottom of this page to unlock. Cannot find it? Email <a href="mailto:fatlosslies@gmail.com" style="color:var(--gold)">fatlosslies@gmail.com</a> and I will sort it.</div>
       <div class="strip-red" id="mini-result-body">Possible patterns will show here once you have answered the audit.</div>
       <div class="strip" id="mini-result-quote">"You haven't failed at dieting. You've just never had a proper system. That's different, and fixable."</div>
       <div class="divider"></div>
@@ -391,7 +392,7 @@
       <div style="text-align:center;margin:8px 0 4px"></div>
       <div class="emerg-card" onclick="toggleEmerg(this)"><div class="emerg-row"><span class="emerg-icon">👀</span><span class="emerg-trigger">Peek inside: a sample day</span><span class="emerg-toggle">+</span></div><div class="emerg-body" id="paywall-peek"></div></div>
       <div class="strip" style="margin-bottom:6px"><strong style="color:var(--text);display:block;margin-bottom:6px">Who made this</strong>I'm DJ. I've been a fitness instructor and a PT, and I spent years getting this wrong: starving, bingeing, over-training, plan-hopping. I got abs at 50 by getting boring. I built this because I needed it myself.</div>
-      <button class="cta" onclick="window.open(&#39;https://payhip.com/buy?link=IZb13&#39;,&#39;_blank&#39;)">Get the Full Plan &nbsp;·&nbsp; £14.99</button>
+      <button class="cta" onclick="window.open(&#39;https://payhip.com/buy?link=IZb13&#39;,&#39;_blank&#39;)">Get the Full Plan &nbsp;·&nbsp; $14.99</button>
       <p style="font-size:12px;color:var(--text-4);text-align:center;line-height:1.6;margin:2px 0 6px"><strong style="color:var(--text)">7-day money back.</strong> Email <a href="mailto:fatlosslies@gmail.com" style="color:var(--gold)">fatlosslies@gmail.com</a> within 7 days of buying and I'll refund you.</p>
       <div class="strip" style="margin-top:2px"><strong style="color:var(--text);display:block;margin-bottom:4px">What happens next</strong>You'll be sent a licence key by email after purchase. Copy and paste it into the box below. <strong style="color:var(--text)">Keep this tab open</strong>. Payhip sometimes opens a new version of the app, and your audit lives in this one.</div>
       <div style="margin-top:12px;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:18px">
@@ -468,10 +469,6 @@
             <option value="male">Male</option>
           </select>
         </div>
-      </div>
-      <div id="calc-minor" style="display:none;background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:12px">
-        <div style="font-size:13px;color:var(--text-4);line-height:1.6;margin-bottom:8px">Under 18? Please talk to a parent, guardian or your GP before you follow any fat-loss plan. Growing bodies have different needs.</div>
-        <label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--text);line-height:1.5"><input type="checkbox" id="calc-minor-ok" style="margin-top:3px"> A parent, guardian or my GP has agreed I can use this.</label>
       </div>
       <div><div class="calc-label">Activity level (outside training)</div>
         <select id="calc-activity" class="calc-select">
@@ -942,7 +939,7 @@ const trainingQs = [
     no:`Then your training has probably stopped asking anything new of your body. Progressive overload applies to bodyweight too. More reps, harder variations, slower tempo. The body adapts to whatever you keep repeating.`,
     attacked:`Comfortable is just another word for plateau. Whether that's a barbell or a press-up. If it doesn't challenge you, it won't change you.` },
   { q:`Did you stop your sets while they still felt easy?`,
-    yes:`If the last 3 reps aren't hard, the set isn't doing much. The body changes when it's asked to do something it isn't used to.`,
+    yes:`If the last 3 reps aren't hard, the set probably isn't asking enough of your body yet. The body changes when it's asked to do something it isn't used to.`,
     no:`Good. The last 3 reps of a set should be hard. That's where the change happens.`,
     attacked:`The song ending is not a valid reason to rack the bar.` },
   { q:`Did you eat back calories after training because you felt you'd earned it?`,
@@ -1853,9 +1850,8 @@ function calculatePlan() {
   if (!weight || !height || !age || !sex || !activity) return fail('Please fill in all fields before calculating.');
   if (weight < 30 || weight > 300) return fail('Weight looks off. Enter kilograms, e.g. 75 (not stone or pounds).');
   if (height < 120 || height > 230) return fail('Height looks off. Enter centimetres, e.g. 165 (not metres or feet).');
-  if (age < 16) return fail('This tool is for people aged 16 and over. If you are younger, please speak to your GP or school nurse about healthy eating and activity.');
+  if (age < 18) return fail('This tool is for adults aged 18 and over. If you are younger, please speak to your GP or school nurse about healthy eating and activity.');
   if (age > 100) return fail('Age looks off. Check the number.');
-  if (age < 18 && !(document.getElementById('calc-minor-ok') && document.getElementById('calc-minor-ok').checked)) { calcAgeCheck(); return fail('Because you are under 18, please tick the box to confirm a parent, guardian or your GP has agreed.'); }
   const bmiNow = weight / Math.pow(height / 100, 2);
   if (bmiNow < 18.5) return fail('Your height and weight put you below the healthy BMI range (18.5 and over), so a fat-loss plan is not right for you. BMI is only a rough guide, so please speak to your GP.');
   const minGoalKg = Math.ceil(18.5 * Math.pow(height / 100, 2));
@@ -2373,7 +2369,7 @@ function renderCheckins() {
 //     TODAY TALLY, WEEK-BY-WEEK TASKS
 // ══════════════════════════════════════════════════════════════════════════
 const SUPPORT_EMAIL = 'fatlosslies@gmail.com';
-const BOOKING_URL = ''; // Paste a booking link here. While empty, "Book now" opens an email to SUPPORT_EMAIL.
+const BOOKING_URL = 'https://stan.store/DeLoCoLabs/p/fat-loss-plan-review-with-dj'; // Paste a booking link here. While empty, "Book now" opens an email to SUPPORT_EMAIL.
 const SAMPLE_BANDS = [1400, 1600, 1800, 2000];
 const SAMPLE_DAYS = {"1400": [{"label": "Day A: meat and fish", "meals": [{"name": "Breakfast", "items": ["Greek yogurt 0%, 150g", "Porridge oats, 40g", "Berries, 80g"], "kcal": 265, "p": 20}, {"name": "Lunch", "items": ["Chicken breast, 110g (raw weight)", "1 wholemeal wrap", "Salad and veg, 100g", "Hummus, 40g", "1 apple"], "kcal": 460, "p": 35}, {"name": "Dinner", "items": ["5% beef mince, 110g (raw weight)", "Chopped tomatoes, 200g", "Kidney beans, drained, 80g", "Rice, 150g (cooked weight)", "Vegetables, 100g", "1½ tsp olive oil"], "kcal": 565, "p": 38}, {"name": "Snack", "items": ["Low fat cottage cheese, 100g", "Berries, 60g"], "kcal": 105, "p": 12}], "kcal": 1395, "p": 104, "c": 164, "f": 33}, {"label": "Day B: vegetarian", "meals": [{"name": "Breakfast", "items": ["3 eggs", "1 wholemeal bread", "Spinach, 60g", "1 tsp olive oil"], "kcal": 410, "p": 27}, {"name": "Lunch", "items": ["Baked potato, 200g", "Low fat cottage cheese, 150g", "Reduced fat cheddar, 20g", "Salad and veg, 100g"], "kcal": 380, "p": 29}, {"name": "Dinner", "items": ["Quorn mince, 130g", "Tomato pasta sauce, 150g", "Pasta, 150g (cooked weight)", "Vegetables, 100g", "1 tsp olive oil"], "kcal": 500, "p": 31}, {"name": "Snack", "items": ["Greek yogurt 0%, 150g", "Berries, 80g"], "kcal": 115, "p": 16}], "kcal": 1406, "p": 103, "c": 149, "f": 42}], "1600": [{"label": "Day A: meat and fish", "meals": [{"name": "Breakfast", "items": ["Greek yogurt 0%, 170g", "Porridge oats, 40g", "Berries, 80g", "1 banana", "1 tbsp peanut butter"], "kcal": 460, "p": 27}, {"name": "Lunch", "items": ["Chicken breast, 125g (raw weight)", "1 wholemeal wrap", "Salad and veg, 100g", "Hummus, 40g", "1 apple"], "kcal": 475, "p": 38}, {"name": "Dinner", "items": ["5% beef mince, 125g (raw weight)", "Chopped tomatoes, 200g", "Kidney beans, drained, 80g", "Rice, 150g (cooked weight)", "Vegetables, 100g", "½ tsp olive oil"], "kcal": 540, "p": 41}, {"name": "Snack", "items": ["Low fat cottage cheese, 125g", "Berries, 60g"], "kcal": 125, "p": 14}], "kcal": 1602, "p": 121, "c": 188, "f": 37}, {"label": "Day B: vegetarian", "meals": [{"name": "Breakfast", "items": ["3 eggs", "2 wholemeal bread", "Spinach, 60g", "1 tsp olive oil"], "kcal": 505, "p": 31}, {"name": "Lunch", "items": ["Baked potato, 250g", "Low fat cottage cheese, 170g", "Reduced fat cheddar, 20g", "Salad and veg, 100g"], "kcal": 445, "p": 33}, {"name": "Dinner", "items": ["Quorn mince, 150g", "Tomato pasta sauce, 150g", "Pasta, 150g (cooked weight)", "Vegetables, 100g", "1 tsp olive oil"], "kcal": 515, "p": 34}, {"name": "Snack", "items": ["Greek yogurt 0%, 170g", "Berries, 80g"], "kcal": 130, "p": 18}], "kcal": 1591, "p": 115, "c": 178, "f": 44}], "1800": [{"label": "Day A: meat and fish", "meals": [{"name": "Breakfast", "items": ["Greek yogurt 0%, 200g", "Porridge oats, 40g", "Berries, 80g", "1 banana", "1 tbsp peanut butter"], "kcal": 480, "p": 30}, {"name": "Lunch", "items": ["Chicken breast, 140g (raw weight)", "1 wholemeal wrap", "Salad and veg, 100g", "Hummus, 40g", "1 apple"], "kcal": 490, "p": 42}, {"name": "Dinner", "items": ["5% beef mince, 140g (raw weight)", "Chopped tomatoes, 200g", "Kidney beans, drained, 80g", "Rice, 150g (cooked weight)", "Vegetables, 100g", "1 tsp olive oil"], "kcal": 580, "p": 44}, {"name": "Snack", "items": ["Low fat cottage cheese, 150g", "Berries, 60g", "1 dark chocolate"], "kcal": 260, "p": 19}], "kcal": 1812, "p": 135, "c": 199, "f": 49}, {"label": "Day B: vegetarian", "meals": [{"name": "Breakfast", "items": ["3 eggs", "2 wholemeal bread", "Spinach, 60g", "1 tsp olive oil"], "kcal": 505, "p": 31}, {"name": "Lunch", "items": ["Baked potato, 250g", "Low fat cottage cheese, 200g", "Reduced fat cheddar, 20g", "Salad and veg, 100g", "1 apple"], "kcal": 540, "p": 37}, {"name": "Dinner", "items": ["Quorn mince, 170g", "Tomato pasta sauce, 150g", "Pasta, 150g (cooked weight)", "Vegetables, 100g", "1 tsp olive oil"], "kcal": 530, "p": 37}, {"name": "Snack", "items": ["Greek yogurt 0%, 200g", "Berries, 80g", "1 tbsp peanut butter"], "kcal": 240, "p": 25}], "kcal": 1818, "p": 129, "c": 201, "f": 54}], "2000": [{"label": "Day A: meat and fish", "meals": [{"name": "Breakfast", "items": ["Greek yogurt 0%, 220g", "Porridge oats, 40g", "Berries, 80g", "1 banana", "1 tbsp peanut butter"], "kcal": 490, "p": 32}, {"name": "Lunch", "items": ["Chicken breast, 150g (raw weight)", "1 wholemeal wrap", "Salad and veg, 100g", "Hummus, 40g", "1 apple"], "kcal": 500, "p": 44}, {"name": "Dinner", "items": ["5% beef mince, 150g (raw weight)", "Chopped tomatoes, 200g", "Kidney beans, drained, 80g", "Rice, 150g (cooked weight)", "Vegetables, 100g", "1½ tsp olive oil"], "kcal": 615, "p": 46}, {"name": "Snack", "items": ["Low fat cottage cheese, 170g", "Berries, 60g", "2 dark chocolate"], "kcal": 395, "p": 22}], "kcal": 2000, "p": 145, "c": 210, "f": 61}, {"label": "Day B: vegetarian", "meals": [{"name": "Breakfast", "items": ["4 eggs", "2 wholemeal bread", "Spinach, 60g", "1 tsp olive oil"], "kcal": 590, "p": 38}, {"name": "Lunch", "items": ["Baked potato, 250g", "Low fat cottage cheese, 200g", "Reduced fat cheddar, 20g", "Salad and veg, 100g", "1 apple"], "kcal": 540, "p": 37}, {"name": "Dinner", "items": ["Quorn mince, 180g", "Tomato pasta sauce, 150g", "Pasta, 150g (cooked weight)", "Vegetables, 100g", "1 tsp olive oil"], "kcal": 540, "p": 38}, {"name": "Snack", "items": ["Greek yogurt 0%, 200g", "Berries, 80g", "2 tbsp peanut butter"], "kcal": 335, "p": 29}], "kcal": 2007, "p": 141, "c": 204, "f": 68}]};
 
@@ -2407,7 +2403,7 @@ function renderCalcResults(t) {
     : `Based on your goal weight of ${goalLbs}lbs. This number is not forever. It adjusts as you do.`;
   const trainWhy = trainingDays < 1
     ? `If you're new, start with 3 full-body sessions per week. You do not need a perfect programme yet. You need repeatable sessions that train your whole body without turning the gym into a GCSE exam.`
-    : `Add a little weight or a rep when the last 3 reps stop feeling hard. If they feel easy, the set is not doing much.`;
+    : `Add a little weight or a rep when the last 3 reps stop feeling hard. If they feel easy, the set is probably not asking enough yet.`;
   const floorNote = t.floored ? `<div class="strip-red" style="margin-bottom:10px"><strong style="display:block;margin-bottom:4px">Your numbers came out below 1,200 calories.</strong>This app does not go below 1,200. That is our minimum for fat loss without professional support, so your pace will be slower than the maths suggested. If you think you would need to eat less than this to lose weight, please talk to your GP or a registered dietitian first.</div>` : '';
   body.innerHTML = floorNote + `
     <div class="strip" style="margin-bottom:2px">Five building blocks. Do them in this order. Each one makes the next one easier.</div>
@@ -2449,6 +2445,7 @@ function renderCalcResults(t) {
       <div class="week-label">Train</div>
       <div class="week-title">${trainRec}</div>
       <div class="week-desc">${trainWhy}</div>
+      <div class="week-desc" style="margin-top:8px">No weights? The home plan works with a backpack, water bottles or resistance bands. There is a note about it in the plan.</div>
       <button class="cta-outline" style="margin-top:10px" onclick="go(24)">See my 3-day plan (home or gym)</button>
     </div>
 
@@ -2619,19 +2616,63 @@ const TRAIN = {
     { name: 'Day 1', focus: 'Squat and push', ex: [
       ['Goblet squat (or squat to a chair, no weights)', '3 x 10–15'], ['Dumbbell Romanian deadlift (or good morning)', '3 x 10–12'], ['Press-ups (incline on a worktop or sofa if needed)', '3 x as many as you can with good form (the last 3 should be hard)'], ['One-arm dumbbell row (or a heavy bag or resistance band)', '3 x 10 each arm'], ['Plank', '3 x 30–45 seconds'] ] },
     { name: 'Day 2', focus: 'Glutes and pull', ex: [
-      ['Reverse lunge', '3 x 8–10 each leg'], ['Glute bridge (single leg to make it harder)', '3 x 12–15'], ['Dumbbell shoulder press (or pike press-up)', '3 x 8–12'], ['Band pull-apart or bent-over row with a bag', '3 x 12–15'], ['Farmer’s carry with shopping bags or dumbbells', '3 x 30–40 seconds'] ] },
+      ['Reverse lunge', '3 x 8–10 each leg'], ['Glute bridge (single leg to make it harder)', '3 x 12–15'], ['Dumbbell shoulder press (or pike press-up, a harder option)', '3 x 8–12'], ['Band pull-apart or bent-over row with a bag', '3 x 12–15'], ['Farmer’s carry with shopping bags or dumbbells', '3 x 30–40 seconds'] ] },
     { name: 'Day 3', focus: 'Single leg and hinge', ex: [
-      ['Split squat with back foot on a sofa', '3 x 8–10 each leg'], ['Single-leg or two-leg Romanian deadlift', '3 x 10'], ['Decline or standard press-up', '3 x as many as you can with good form (the last 3 should be hard)'], ['Bent-over dumbbell or bag row', '3 x 10–12'], ['Dead bug', '3 x 8 each side'] ] },
+      ['Split squat (beginner: both feet on the floor. Harder: back foot on a sofa)', '3 x 8–10 each leg'], ['Single-leg or two-leg Romanian deadlift', '3 x 10'], ['Press-up (beginner: hands on a worktop or sofa. Harder: feet on a sofa)', '3 x as many as you can with good form (the last 3 should be hard)'], ['Bent-over dumbbell or bag row', '3 x 10–12'], ['Dead bug', '3 x 8 each side'] ] },
   ],
 };
+const ARM_FINISHERS = {
+  gym: [
+    [['Dumbbell biceps curl', '2 x 10–12'], ['Rope triceps pushdown', '2 x 10–12']],
+    [['Hammer curl', '2 x 10–12'], ['Overhead dumbbell triceps extension', '2 x 10–12']],
+    [['Cable or EZ-bar curl', '2 x 10–12'], ['Bench dips', '2 x 8–12']]
+  ],
+  home: [
+    [['Dumbbell or bag biceps curl', '2 x 10–12'], ['Chair or sofa dips', '2 x 8–12']],
+    [['Hammer curl with dumbbells or tins', '2 x 10–12'], ['Overhead triceps extension with one dumbbell or bag', '2 x 10–12']],
+    [['Resistance band or backpack curl', '2 x 10–12'], ['Close-grip press-up (on your knees if needed)', '2 x 8–12']]
+  ]
+};
+Object.keys(ARM_FINISHERS).forEach(k => TRAIN[k].forEach((d, i) => { d.armStart = d.ex.length; d.ex.push(...ARM_FINISHERS[k][i]); }));
+const NO_WEIGHTS = {
+  title: 'No weights? You can still start.',
+  paras: [
+    'The home plan works with what you already have: a backpack with books in it, filled water bottles or tins, and your own bodyweight. Use a bag or bottles you can grip securely and keep your back straight. Bodyweight and bag training works. When you want to keep progressing, heavier loads give you more room to.',
+    'When you are ready, a small one-off spend on a pair of dumbbells or some resistance bands can cost less than a month of the next diet club or shake subscription. It is one of the cheapest things in this plan, and you keep it long after the plan ends. You do not need a rack. You need something heavy enough that the last 3 reps are hard.'
+  ]
+};
+const EX_NOTE = {
+  'Chair or sofa dips': 'Use something solid that will not slide or tip. If you do not have it, skip this move.',
+  'Bench dips': 'Keep your hips close to the bench. Stop if your shoulders pinch.',
+  'Press-up (beginner: hands on a worktop or sofa. Harder: feet on a sofa)': 'Start with hands raised. Lower the height of your hands as it gets easier.',
+  'Dumbbell shoulder press (or pike press-up, a harder option)': 'Pike press-ups are a harder option. Start with the dumbbell version or a light bag.',
+  'Split squat (beginner: both feet on the floor. Harder: back foot on a sofa)': 'Start with both feet on the floor. Add the sofa only when that feels steady.'
+};
+const DEMO_QUERY = {
+  'Dumbbell or bag biceps curl': 'dumbbell biceps curl',
+  'Chair or sofa dips': 'chair dips triceps',
+  'Cable or EZ-bar curl': 'cable biceps curl',
+  'Resistance band or backpack curl': 'resistance band biceps curl',
+  'Single-leg or two-leg Romanian deadlift': 'single leg romanian deadlift',
+  'Kettlebell or dumbbell deadlift': 'kettlebell deadlift',
+  'Bent-over dumbbell or bag row': 'bent over dumbbell row',
+  'Bench dips': 'bench dips triceps',
+  'Close-grip press-up (on your knees if needed)': 'close grip push up triceps'
+};
+function demoQuery(name) {
+  if (DEMO_QUERY[name]) return DEMO_QUERY[name] + ' exercise form';
+  return name.split(' (')[0].split(' or ')[0].split(' with ')[0].trim() + ' exercise form';
+}
 const TRAIN_RULES = [
   'Three sessions a week, not on consecutive days. Monday, Wednesday, Friday works for most people.',
   'Warm up for 5 minutes: a brisk walk or marching on the spot, then one light set of your first exercise.',
-  'New to lifting? Do 2 sets of everything for the first fortnight, then add the third.',
-  'The last 3 reps of every working set should be hard. If they feel easy, the weight is too light and the set is not doing much. If your form falls apart, it is too heavy.',
+  'Sets: the plan shows 3 sets of each main move, which is where you are heading. New to lifting? Do 2 sets of each main move for the first fortnight, then add the third.',
+  'The last 3 reps of every working set should be hard, with your form still holding. If they feel easy, make the next set a little harder: more weight, more reps or a slower lowering. If your form falls apart, ease off. You do not need to go to failure.',
   'Rest 60 to 90 seconds between sets. Longer on the big lifts. Phone down.',
+  'The arm finisher at the end of each day is optional. Do it when you have the time and energy: 2 sets each, last 3 reps hard. It stays at 2 sets.',
+  'Short on time? Do the main moves only, 2 sets each. A short session you actually do beats a long one you skip.',
   'Progress: when you hit the top of the rep range on every set, add a little weight next time. At home, add reps, slow the lowering to 3 seconds, or load a backpack.',
-  'Write down what you lifted. If the weight and reps have not moved in a few weeks, push the last 3 reps harder or add a little load.',
+  'Write down what you lifted. If nothing has moved in 3 to 4 weeks, check the basics first: sleep, protein, turning up three times a week and good form. Then make the last 3 reps harder or add a little load.',
   'Sharp pain is not effort. Stop and get it checked.',
 ];
 let trainMode = readKey('fll_train_mode', 'gym');
@@ -2639,12 +2680,12 @@ function setTrainMode(m) { trainMode = m; saveKey('fll_train_mode', m); buildTra
 function oneToOneHTML() {
   const href = BOOKING_URL
     ? BOOKING_URL
-    : 'mailto:' + SUPPORT_EMAIL + '?subject=' + encodeURIComponent('One-to-one overhaul session') + '&body=' + encodeURIComponent('Hi DJ, I would like to book a one-to-one session. Here is what I am doing at the moment:');
+    : 'mailto:' + SUPPORT_EMAIL + '?subject=' + encodeURIComponent('Fat Loss Plan Review') + '&body=' + encodeURIComponent('Hi DJ, I would like to book a Fat Loss Plan Review. Here is what I am doing at the moment:');
   return `<div class="week-card" style="border-color:rgba(201,168,76,0.4)">
     <div class="week-label">Optional · One-to-one with DJ</div>
-    <div class="week-title">Want me to look at yours?</div>
-    <div class="week-desc">A full done-for-you overhaul of your current efforts: your food, your training and your week, rebuilt so it works. The app is complete without it. This is for when you'd rather I did the thinking.<br><br><strong style="color:var(--text);font-size:16px">$75 USD</strong></div>
-    <a class="cta" href="${href}" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-top:10px">${BOOKING_URL ? 'Book now' : 'Enquire about a one-to-one'}</a>
+    <div class="week-title">Fat Loss Plan Review</div>
+    <div class="week-desc">A 45-minute one-to-one call. When you book, you answer a short question about what you are doing now. On the call we go through it together. Within 2 working days you get your 3 biggest priorities and a revised weekly outline in writing, plus one follow-up email for questions. The app is complete without it. This is for when you would like a second pair of eyes.<br><br><strong style="color:var(--text);font-size:16px">$99 USD</strong></div>
+    <a class="cta" href="${href}" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-top:10px">${BOOKING_URL ? 'Book your review' : 'Enquire about a review'}</a>
   </div>`;
 }
 function buildTrainPlan() {
@@ -2658,7 +2699,9 @@ function buildTrainPlan() {
   });
   const days = TRAIN[trainMode] || TRAIN.gym;
   let html = days.map(d => `<div class="week-card"><div class="week-label">${d.name} · ${d.focus}</div>` +
-    d.ex.map(e => `<div style="padding:8px 0;border-top:0.5px solid var(--border-faint)"><div style="font-size:14px;color:var(--text-2);line-height:1.5">${esc(e[0])}</div><div class="meal-line" style="color:var(--gold)">${esc(e[1])}</div></div>`).join('') + `</div>`).join('');
+    d.ex.map((e, ei) => (ei === d.armStart ? `<div class="week-label" style="margin-top:10px;padding-top:8px;border-top:0.5px solid var(--border)">Optional arm finisher</div>` : '') + `<div style="padding:8px 0;border-top:0.5px solid var(--border-faint)"><div style="font-size:14px;color:var(--text-2);line-height:1.5">${esc(e[0])}</div><div class="meal-line" style="color:var(--gold)">${esc(e[1])}</div>${EX_NOTE[e[0]] ? `<div class="meal-line" style="font-size:12px">${esc(EX_NOTE[e[0]])}</div>` : ''}<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(demoQuery(e[0]))}" target="_blank" rel="noopener" style="font-size:12px;color:var(--gold);text-decoration:underline">Watch a demo</a></div>`).join('') + `</div>`).join('');
+  if (trainMode === 'home') html = `<div class="strip"><strong style="color:var(--text);display:block;margin-bottom:6px">New to training? Start here</strong>Use the easier version of every move: squat to a chair, press-ups with your hands on a worktop, both feet on the floor for split squats, and a light bag or bottles. Skip anything labelled harder until the basics feel steady.</div>` + html;
+  html = `<div class="strip"><strong style="color:var(--text);display:block;margin-bottom:6px">${NO_WEIGHTS.title}</strong>${NO_WEIGHTS.paras.map(esc).join('<br><br>')}</div>` + html;
   html += `<div class="strip"><strong style="color:var(--text);display:block;margin-bottom:6px">How to run it</strong>${TRAIN_RULES.map(r => `• ${esc(r)}`).join('<br><br>')}</div>`;
   document.getElementById('train-body').innerHTML = html;
   document.getElementById('oneone-slot').innerHTML = oneToOneHTML();
@@ -2936,12 +2979,8 @@ function buildPattern() {
 // ═════════════════════════════════════════════════════════════════
 const MIN_CAL = 1200;
 
-// ── Age check for 16 and 17 year olds ────────────────────────────────────
-function calcAgeCheck() {
-  const a = parseFloat((document.getElementById('calc-age') || {}).value);
-  const box = document.getElementById('calc-minor');
-  if (box) box.style.display = (a >= 16 && a < 18) ? 'block' : 'none';
-}
+// Age check: adults only (18+), enforced in the calculator
+function calcAgeCheck() {}
 
 // ── Retake the audit (keeps purchase, targets and progress) ──────────────
 function resetAuditState() {
@@ -3024,7 +3063,9 @@ const TOOLS = {
       const p = [0, 1, 2, 3].reduce((a, i) => a + num(d['m' + i + 'p']), 0);
       if (!k && !p) return '';
       const t = getTargets();
-      let msg = `Your four meals add up to about <strong style="color:var(--text)">${fmtNum(k)} kcal</strong> and <strong style="color:var(--text)">${fmtNum(p)}g protein</strong>.`;
+      const main = [0, 1, 2].filter(i => num(d['m' + i + 'k']) > 0).length;
+      if (main < 3) return `So far: <strong style="color:var(--text)">${fmtNum(k)} kcal</strong> and <strong style="color:var(--text)">${fmtNum(p)}g protein</strong>. Complete your day (breakfast, lunch and dinner) to compare with your targets.`;
+      let msg = `Your meals add up to about <strong style="color:var(--text)">${fmtNum(k)} kcal</strong> and <strong style="color:var(--text)">${fmtNum(p)}g protein</strong>.`;
       if (t) {
         if (k < t.calLow - 100) msg += ` That is under your range of ${t.calLow} to ${t.calHigh}. Make one meal you enjoy a bit bigger rather than adding a new meal.`;
         else if (k > t.calHigh + 100) msg += ` That is over your range of ${t.calLow} to ${t.calHigh}. Trim the part with the most spare calories (oil, sauce or the carb) rather than dropping the meal.`;
@@ -3391,6 +3432,17 @@ function printSummary() {
   document.body.classList.add('printing');
   setTimeout(() => { window.print(); setTimeout(() => document.body.classList.remove('printing'), 500); }, 50);
 }
+
+// Back from Payhip checkout: point the buyer to their emailed key
+(function () {
+  const q = new URLSearchParams(location.search);
+  if (!q.has('justpurchased')) return;
+  try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  if (unlocked) return;
+  go(6);
+  const b = document.getElementById('purchase-banner'); if (b) b.style.display = 'block';
+  setTimeout(() => { const i = document.getElementById('unlock-input'); if (i) { i.scrollIntoView({ block: 'center' }); i.focus(); } }, 300);
+})();
 
 </script>
 
