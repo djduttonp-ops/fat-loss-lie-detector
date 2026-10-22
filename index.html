@@ -249,7 +249,8 @@
     <div class="status-bar"></div>
     <div class="header">
       <div class="logo">The Fat Loss Lie Detector</div>
-      <p style="font-size:13px;color:var(--gold);margin:10px 0 0;line-height:1.5">For women over 40 who are eating well and training but still not losing fat.</p>
+      <p style="font-size:15px;color:var(--gold);margin:10px 0 0;line-height:1.4;font-weight:600">Trying to lose fat but getting nowhere? Find what's holding you back, and what to change first.</p>
+      <p style="font-size:13px;color:var(--muted,#bbb);margin:8px 0 0;line-height:1.5">An interactive audit and practical six-week reset built around your food, training and real life.</p>
       <h1 style="margin-top:16px">Still not losing fat?</h1>
       <p class="sub" style="margin-top:10px">Think you're doing everything right?<br><br>You're training. You're eating well. You've tried the plans. You've blamed carbs, hormones, metabolism, and Monday.<br><br>And still, nothing is shifting.<br><br><strong style="color:var(--text)">Let's test that.</strong></p>
     </div>
@@ -619,9 +620,9 @@
     <div class="body">
       <div class="strip-dim">Same six-week calorie range. Same protein target. Each week layers one skill on top. These are not new diets every week.</div>
       <div class="week-card"><div class="week-label">Week 1</div><div class="week-title">Stop lying to yourself, track honestly.</div><div class="week-desc">Everything goes in. Bites, sips, drizzles, weekend meals. No edits. No amnesia. Seven days of truth. It will sting. That sting is awareness.<br><br><em>This range is your six-week starting point. Don't fiddle with it yet.</em></div></div>
-      <div class="week-card"><div class="week-label">Week 2: Build Your Base Meals</div><div class="week-title">Four or five meals that make hitting your numbers easier.</div><div class="week-desc">You're still following your calorie and protein targets. This week we're making that easier.<br><br>Pick 4–5 meals you genuinely like and can repeat without thinking. You already repeat foods now: breakfast, sandwiches, takeaways, the same dinner when you're tired. We're just making the repeats work for you.<br><br>This isn't restriction. Nothing is banned. Your base meals simply remove twenty unnecessary food decisions from your week.<br><br><em>Same calorie range. Same protein target. We're making adherence easier, not changing the numbers.</em></div></div>
+      <div class="week-card"><div class="week-label">Week 2: Build Your Base Meals</div><div class="week-title">Four or five meals that make hitting your numbers easier.</div><div class="week-desc">You're still following your calorie and protein targets. This week we're making that easier.<br><br>Pick 4–5 meals you genuinely like and can repeat without thinking. You already repeat foods now: breakfast, sandwiches, takeaways, the same dinner when you're tired. We're just making the repeats work for you.<br><br>This isn't restriction. Nothing is banned. Your base meals simply remove twenty unnecessary food decisions from your week.<br><br>This is also the week you weigh one usual carb portion and find out what it really is.<br><br><em>Same calorie range. Same protein target. We're making adherence easier, not changing the numbers.</em></div></div>
       <div class="week-card"><div class="week-label">Week 3</div><div class="week-title">Protein without becoming unbearable about it.</div><div class="week-desc">Hit your protein target without announcing it at dinner. Nobody needs to know. Add it quietly. Chicken, eggs, Greek yogurt, cottage cheese. The Builder shows up without a press release.<br><br><em>Still working within your original range.</em></div></div>
-      <div class="week-card"><div class="week-label">Week 4</div><div class="week-title">Carbs without the drama.</div><div class="week-desc">Learn where carbs fit. Rice, oats, bread, pasta, potatoes. They're fuel, not a personality defect. Match portions to your day, keep them inside your numbers and stop blaming the potato for what the weekend did.<br><br><em>Still working within your original range.</em></div></div>
+      <div class="week-card"><div class="week-label">Week 4</div><div class="week-title">Carby veg for volume.</div><div class="week-desc">Potatoes, squash, peas and carrots fill the plate for fewer calories. Swap part of your usual carb for carby veg and keep eating proper meals. Carbs are fuel, not a personality defect, and you already weighed yours in Week 2.<br><br><em>Still working within your original range.</em></div></div>
       <div class="week-card"><div class="week-label">Week 5: Navigate Real Life</div><div class="week-title">Weekends, alcohol, eating out, and everything else.</div><div class="week-desc">Real life has restaurants, birthday cakes, wine, and other people's cooking. This week you learn to navigate all of it without refusing everything like a martyr or writing off the weekend like a disaster.<br><br><em>Still working within your original range.</em></div></div>
       <div class="week-card"><div class="week-label">Week 6: Eyeball Without Obsessing</div><div class="week-title">Stop needing the scales for every gram.</div><div class="week-desc">By now you know what things weigh. You've tracked. You've cooked. You've eaten it. Now start stepping back from the scale, not because tracking is bad, but because you no longer need it to babysit every meal. You've learned your system.<br><br><em>Six weeks of consistent data is what allows an intelligent review. Now, and only now, is it worth looking at whether your numbers need to move.</em></div></div>
       <div class="strip" style="margin-top:4px">At the end of six weeks you won't have a new diet. You'll have a system. One you built. One that fits your actual life. One that doesn't need a Monday.</div>
@@ -2533,6 +2534,9 @@ const MEALS = {
     { id:'b-cot', pref:'eggs', name:'Cottage cheese or ham on toast', main:['cottage','ham'], extras:[['2 slices wholemeal toast',8],['sliced tomato and cucumber',0]] },
     { id:'b-tofu', pref:'eggs', name:'Tofu scramble on toast', main:['tofu'], extras:[['2 slices wholemeal toast',8],['spinach or mushrooms',1]] },
     { id:'b-smooth', pref:'quick', name:'Banana protein smoothie', main:['whey'], fixed:true, extras:[['1 banana',1],['200ml milk, or your usual milk',7]] },
+    { id:'b-omel', pref:'eggs', name:'Veg omelette with fruit', main:['eggs'], extras:[['peppers, mushrooms and spinach',1],['1 slice wholemeal toast',4],['a piece of fruit',0]] },
+    { id:'b-wrap', pref:'eggs', name:'Egg and ham breakfast wrap', main:['eggs'], extras:[['1 large wholemeal wrap',5],['tomato and spinach',1]] },
+    { id:'b-bowl', pref:'oats', name:'Cottage cheese and fruit bowl', main:['cottage'], extras:[['a sliced banana or berries',1],['a spoon of oats or granola',2]] },
     { id:'b-skyr', pref:'quick', name:'Skyr with fruit and honey', main:['skyr','yogurt'], extras:[['berries or a chopped apple',0],['1 teaspoon honey',0]] }
   ],
   lunch: [
@@ -2544,6 +2548,11 @@ const MEALS = {
     { id:'l-sand', name:'Egg or ham sandwich with salad', main:['eggs','ham'], extras:[['2 slices wholemeal bread',8],['salad and a little light mayo or mustard',1]] },
     { id:'l-tofu', name:'Tofu noodle bowl', main:['tofu'], extras:[['150g cooked noodles',5],['stir-fry vegetables and soy sauce',2]] },
     { id:'l-quorn', name:'Quorn wrap with salad', main:['quorn'], extras:[['1 large wholemeal wrap',5],['salad and a light dressing',1]] },
+    { id:'l-chrice', name:'Chicken and rice bowl', main:['chicken'], extras:[['150g cooked rice',4],['mixed salad or steamed veg',2]] },
+    { id:'l-turk', name:'Turkey burger with salad', main:['turkey','beef'], extras:[['1 wholemeal bun',6],['salad and a little ketchup',1]] },
+    { id:'l-steak', name:'Steak salad with new potatoes', main:['steak'], extras:[['150g new potatoes',3],['leaves, tomatoes and a light dressing',1]] },
+    { id:'l-egg', name:'Egg and potato salad', main:['eggs'], extras:[['150g new potatoes',3],['leaves, cucumber and a light dressing',1]] },
+    { id:'l-yog', name:'Chicken or tuna pitta with yogurt dressing', main:['chicken','tuna'], extras:[['1 wholemeal pitta',5],['salad and a spoon of Greek yogurt',1]] },
     { id:'l-lent', name:'Lentil and vegetable soup with bread', main:['lentils'], extras:[['1 slice wholemeal bread',4],['vegetables and stock',2]] }
   ],
   dinner: [
@@ -2552,8 +2561,11 @@ const MEALS = {
     { id:'d-salm', name:'Salmon with potatoes and greens', main:['salmon'], extras:[['200g potatoes',4],['broccoli or green beans',3]] },
     { id:'d-fish', name:'Baked white fish with potatoes and peas', main:['fish'], extras:[['200g potatoes',4],['80g peas',4]] },
     { id:'d-steak', name:'Steak with sweet potato and veg', main:['steak'], extras:[['1 medium sweet potato',2],['green veg or salad',2]] },
-    { id:'d-bol', name:'Bolognese with pasta', main:['beef','turkey'], extras:[['75g dry pasta',9],['tomato sauce, onion and veg',2]] },
+    { id:'d-bol', name:'Bolognese with pasta', main:['beef','turkey','quorn'], extras:[['75g dry pasta',9],['tomato sauce, onion and veg',2]] },
     { id:'d-curry', name:'Tofu or Quorn curry with rice', main:['tofu','quorn'], extras:[['150g cooked rice',4],['tomato curry sauce and vegetables',3]] },
+    { id:'d-fried', name:'Egg and vegetable fried rice', main:['eggs'], extras:[['150g cooked rice',4],['peas, peppers and spring onion',3],['a splash of soy sauce',0]] },
+    { id:'d-pie', name:'Lentil and vegetable shepherd\'s pie', main:['lentils'], extras:[['200g mashed potato topping',4],['carrots, onion and tomato',2]] },
+    { id:'d-tstir', name:'Tofu stir-fry with noodles', main:['tofu','quorn'], extras:[['150g cooked noodles',5],['stir-fry vegetables and soy sauce',2]] },
     { id:'d-lent', name:'Lentil and vegetable curry with rice', main:['lentils'], extras:[['150g cooked rice',4],['tomato curry sauce and vegetables',3]] },
     { id:'d-trayb', name:'Chicken and vegetable traybake', main:['chicken'], extras:[['250g potatoes',5],['roasted vegetables',3]] }
   ],
@@ -2563,6 +2575,11 @@ const MEALS = {
     { id:'s-shake', name:'Protein shake', main:['whey'], lines:['1 scoop of whey protein, mixed with water or milk'], p:24 },
     { id:'s-egg', name:'Boiled eggs and an apple', main:['eggs'], lines:['2 boiled eggs','an apple'], p:14 },
     { id:'s-cot', name:'Cottage cheese on rice cakes', main:['cottage'], lines:['100g cottage cheese','2 rice cakes'], p:13 },
+    { id:'s-yog2', name:'Greek yogurt with a banana', main:['yogurt'], lines:['150g Greek yogurt (0% fat)','a sliced banana and a little cinnamon'], p:16 },
+    { id:'s-shake2', name:'Protein shake with a banana', main:['whey'], lines:['1 scoop of whey protein','a banana, blended with water or milk'], p:25 },
+    { id:'s-egg2', name:'Egg and tomato on rice cakes', main:['eggs'], lines:['2 boiled eggs, sliced','2 rice cakes and a tomato'], p:16 },
+    { id:'s-cot2', name:'Cottage cheese and pineapple', main:['cottage'], lines:['100g cottage cheese','a few chunks of fresh or tinned pineapple (in juice)'], p:11 },
+    { id:'s-skyr2', name:'Skyr with berries and a few nuts', main:['skyr'], lines:['150g skyr','berries and a small spoon of chopped nuts'], p:17 },
     { id:'s-ham', name:'Ham roll-ups with cucumber', main:['ham'], lines:['80g lean ham or turkey slices','cucumber sticks'], p:14 }
   ]
 };
@@ -2591,12 +2608,20 @@ function eligibleMeals(slot, picks) {
   }
   return list;
 }
-function chooseMeal(slot, picks, usedMain, target) {
+let protChoice = {};
+function slotList(slot, picks, target) {
   let list = eligibleMeals(slot, picks);
+  if (slot === 'snack') list = list.slice().sort((a, b) => Math.abs(a.p - target) - Math.abs(b.p - target));
+  return list;
+}
+function chooseMeal(slot, picks, usedMain, target) {
+  const list = slotList(slot, picks, target);
   if (!list.length) return null;
-  if (slot === 'snack') list = list.slice().sort((a, b) => Math.abs(a.p - target) - Math.abs(b.p - target)).slice(0, 3);
-  const start = ((protOffsets[slot] % list.length) + list.length) % list.length;
-  const rotated = list.slice(start).concat(list.slice(0, start));
+  const chosen = list.find(m => m.id === protChoice[slot]);
+  if (chosen) return chosen;
+  const pool = slot === 'snack' ? list.slice(0, 3) : list;
+  const start = ((protOffsets[slot] % pool.length) + pool.length) % pool.length;
+  const rotated = pool.slice(start).concat(pool.slice(0, start));
   return rotated.find(m => !usedMain.has(mainFood(m, picks).id)) || rotated[0];
 }
 function renderMeal(meal, picks, target) {
@@ -2608,8 +2633,19 @@ function renderMeal(meal, picks, target) {
   const mainP = Math.round(portionProtein(f, n));
   return { name: meal.name, lines: [portionText(f, n)].concat(meal.extras.map(e => e[0])), protein: mainP + extrasP, alt: meal.alt || '', foodId: f.id };
 }
-function swapProtMeal(slot) { protOffsets[slot]++; buildProteinDay(false); }
-function anotherProtDay() { ['breakfast', 'lunch', 'dinner', 'snack'].forEach(k => protOffsets[k]++); buildProteinDay(false); }
+function swapProtMeal(slot) {
+  const t = getTargets(); const picks = PROTEIN_FOODS.filter(f => proteinPicks.includes(f.id));
+  const T = t ? t.protMid : 100;
+  const share = { breakfast: 0.26, lunch: 0.31, dinner: 0.33, snack: 0.10 }[slot];
+  const list = slotList(slot, picks, Math.round(T * share));
+  if (list.length < 2) return;
+  const shown = document.querySelector('#protein-day [data-slot="' + slot + '"]');
+  const cur = shown ? shown.getAttribute('data-meal') : protChoice[slot];
+  const idx = Math.max(0, list.findIndex(m => m.id === cur));
+  protChoice[slot] = list[(idx + 1) % list.length].id;
+  buildProteinDay(false);
+}
+function anotherProtDay() { protChoice = {}; ['breakfast', 'lunch', 'dinner', 'snack'].forEach(k => protOffsets[k]++); buildProteinDay(false); }
 function buildProteinDay(scroll) {
   const out = document.getElementById('protein-day');
   if (!out) return;
@@ -2624,15 +2660,19 @@ function buildProteinDay(scroll) {
   slots.forEach(([key, label, share]) => {
     const target = Math.round(T * share);
     const meal = chooseMeal(key, picks, usedMain, target);
-    if (!meal) { empty.push(label.toLowerCase()); cards += `<div class="week-card"><div class="week-label">${label}</div><div class="meal-line">Nothing on your list suits this meal yet. Add a food or two above.</div></div>`; return; }
+    if (!meal) {
+      if (key === 'snack') { cards += `<div class="week-card"><div class="week-label">${label}</div><div class="meal-line">Nothing on your list suits a snack. Skip it, or add yogurt, skyr, eggs, cottage cheese, ham or whey above.</div></div>`; return; }
+      empty.push(label.toLowerCase()); cards += `<div class="week-card"><div class="week-label">${label}</div><div class="meal-line">Nothing on your list suits this meal yet. Add a food or two above.</div></div>`; return;
+    }
     const r = renderMeal(meal, picks, target);
     const f = mainFood(meal, picks); if (key !== 'snack') usedMain.add(f.id);
     total += r.protein;
-    cards += `<div class="week-card"><div class="week-label">${label}</div><div class="week-title" style="font-size:16px;margin-bottom:4px">${esc(r.name)}</div>` +
+    const more = slotList(key, picks, target).length > 1;
+    cards += `<div class="week-card" data-slot="${key}" data-meal="${meal.id}"><div class="week-label">${label}</div><div class="week-title" style="font-size:16px;margin-bottom:4px">${esc(r.name)}</div>` +
       r.lines.map(l => `<div class="meal-line">• ${esc(l)}</div>`).join('') +
       `<div class="meal-line" style="color:var(--gold)">About ${r.protein}g protein</div>` +
       (r.alt ? `<div class="meal-line" style="font-size:12px">${esc(r.alt)}</div>` : '') +
-      `<button type="button" class="cta-outline" style="margin-top:8px;padding:8px" onclick="swapProtMeal('${key}')">Swap this meal</button></div>`;
+      (more ? `<button type="button" class="cta-outline" style="margin-top:8px;padding:8px" onclick="swapProtMeal('${key}')">Swap this meal</button>` : `<div class="meal-line" style="font-size:12px">Add another food above to get more options for this meal.</div>`) + `</div>`;
   });
   total = Math.round(total);
   const short = Math.round(T - total);
@@ -2877,7 +2917,7 @@ function delLogItem(i) { const d = todayStr(); const log = getLog(d); log.items.
 function clearToday() { putLog(todayStr(), { items: [], hits: {} }); buildToday(); }
 
 // ── WEEK BY WEEK ─────────────────────────────────────────────────────────
-const WEEK_FOCUS = { 2: 'Build your base meals', 3: 'Protein without announcing it', 4: 'Carbs without the drama', 5: 'Navigate real life', 6: 'Eyeball without obsessing' };
+const WEEK_FOCUS = { 2: 'Base meals and carb portions', 3: 'Protein without announcing it', 4: 'Carby veg for volume', 5: 'Navigate real life', 6: 'Eyeball without obsessing' };
 const WEEK_TASKS = {
   2: ['Pick 4 or 5 meals you like and could repeat without thinking.', 'Write each one down with its calories and protein (the sample days will help).', 'Shop for them once so they are actually in the house.', 'Eat those meals on at least 5 days this week.', 'Do your weekly check-in in the Progress tab.'],
   3: ['Hit your protein number on at least 5 days.', 'Add one proper protein source to every meal, using your protein picks.', 'Batch-cook or prep one protein for the week.', 'Notice which meal falls short on protein, and fix that one meal.', 'Do your weekly check-in in the Progress tab.'],
@@ -3185,15 +3225,37 @@ const TOOLS = {
     }
   },
   4: {
+    title: 'Carby veg swap',
+    intro: 'Pick a carb you eat often and a carby veg to swap in for part of it. The plate stays full and the calories drop. Weigh both the same way every time.',
+    build(d) {
+      const carbs = [['', 'Choose the carb you swap out'], ['130', 'Cooked rice'], ['155', 'Cooked pasta'], ['75', 'Boiled potato'], ['240', 'Bread']];
+      const vegs = [['', 'Choose the carby veg you swap in'], ['45', 'Butternut squash'], ['26', 'Pumpkin'], ['35', 'Carrots'], ['35', 'Swede'], ['80', 'Peas'], ['75', 'Parsnip']];
+      const opt = (list, cur) => list.map(o => `<option value="${o[0]}" ${String(cur || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('');
+      let h = `<div class="calc-label">Swap out</div><select class="calc-select" onchange="toolSet(4,'ct',this.value)">${opt(carbs, d.ct)}</select>` +
+        `<div style="margin-top:6px">${toolInput(4, 'cg', 'grams you swap out', 'number', d)}</div>` +
+        `<div class="calc-label" style="margin-top:10px">Swap in</div><select class="calc-select" onchange="toolSet(4,'vt',this.value)">${opt(vegs, d.vt)}</select>` +
+        `<div style="margin-top:6px">${toolInput(4, 'vg', 'grams you swap in (more is fine)', 'number', d)}</div>`;
+      h += `<div class="calc-label" style="margin-top:12px">Roughly per 100g, cooked</div><div class="meal-line">Cooked rice ≈ 130 kcal<br>Cooked pasta ≈ 155 kcal<br>Boiled potato ≈ 75 kcal<br>Peas ≈ 80 kcal<br>Parsnip ≈ 75 kcal<br>Butternut squash ≈ 45 kcal<br>Carrots ≈ 35 kcal<br>Swede ≈ 35 kcal<br>Pumpkin ≈ 26 kcal</div>`;
+      return h;
+    },
+    summary(d) {
+      const c = num(d.ct), cg = num(d.cg), v = num(d.vt), vg = num(d.vg);
+      if (!(c && cg && v && vg)) return '';
+      const saved = Math.round(cg * c / 100 - vg * v / 100);
+      if (saved <= 0) return `That swap does not save calories, but it can still add volume. Try a larger amount of a lighter veg, like squash, carrots or swede.`;
+      return `Swapping ${Math.round(cg)}g for ${Math.round(vg)}g saves about <strong style="color:var(--text)">${saved} kcal</strong> and the plate looks fuller. Do it a few times a week and it adds up without feeling like a diet.`;
+    }
+  },
+  8: {
     title: 'Your usual carb portion, on the scale',
     intro: 'Weigh one carb you eat often, the way you would normally serve it. Compare it with what you assumed.',
     build(d) {
       let h = '';
       for (let i = 0; i < 3; i++) {
         h += `<div style="margin-bottom:10px"><div class="calc-label">Carb ${i + 1}</div>` +
-          `<select class="calc-select" onchange="toolSet(4,'c${i}t',this.value)">` +
+          `<select class="calc-select" onchange="toolSet(8,'c${i}t',this.value)">` +
           [['', 'Choose'], ['130', 'Cooked rice'], ['155', 'Cooked pasta'], ['75', 'Boiled potato'], ['370', 'Dry oats'], ['240', 'Bread']].map(o => `<option value="${o[0]}" ${String(d['c' + i + 't'] || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('') +
-          `</select><div style="display:flex;gap:8px;margin-top:6px"><div style="flex:1">${toolInput(4, 'c' + i + 'a', 'I assumed (g)', 'number', d)}</div><div style="flex:1">${toolInput(4, 'c' + i + 's', 'scale says (g)', 'number', d)}</div></div></div>`;
+          `</select><div style="display:flex;gap:8px;margin-top:6px"><div style="flex:1">${toolInput(8, 'c' + i + 'a', 'I assumed (g)', 'number', d)}</div><div style="flex:1">${toolInput(8, 'c' + i + 's', 'scale says (g)', 'number', d)}</div></div></div>`;
       }
       h += `<div class="calc-label" style="margin-top:12px">Roughly what 100g of each gives you (as you weigh it)</div><div class="meal-line">Cooked rice ≈ 130 kcal<br>Cooked pasta ≈ 155 kcal<br>Boiled potato ≈ 75 kcal<br>Dry oats ≈ 370 kcal<br>Bread ≈ 240 kcal. A slice is usually 35 to 45g.</div>`;
       h += `<div class="calc-label" style="margin-top:12px">Raw versus cooked</div><div class="meal-line">75g dry rice ≈ 260 kcal (about 190g cooked). 75g dry pasta ≈ 265 kcal (about 175g cooked). Weigh it the same way every time, raw or cooked, and use the matching number on the packet.</div>`;
@@ -3257,6 +3319,20 @@ const TOOLS = {
   }
 };
 
+function alcoholCardHtml() {
+  const rows = [
+    ['Count it.', 'Alcohol has about 7 kcal per gram, no protein, and it does not fill you up. It is easy to leave out and it adds up fast. A 175ml glass of wine is roughly 130 to 160 kcal, a pint of lager roughly 180 to 220, and a gin with slimline tonic roughly 60.'],
+    ['Take it from carbs and fats, not protein.', 'Protein is the number you protect. If you plan two glasses of wine (about 280 kcal), take that from the carbs and fats you would have had that day. Keep your protein where it is.'],
+    ['Do not cut carbs to nothing.', 'Skipping all carbs to save room for a drink usually ends in a raid on the fridge later. Keep some carbs in the day.'],
+    ['Eat a proper meal first.', 'A real meal with protein and carbs before you drink. Not a handful of crackers and a plan.'],
+    ['Do not start on white spirits for the maths.', 'If you do not usually drink them, this is not the week to begin. Count what you actually enjoy.'],
+    ['Carbs need a place.', 'If you leave them no room, they turn up later as leftover pizza boxes. Plan them in.']
+  ];
+  return `<div class="week-card" style="border-color:rgba(201,168,76,0.3)"><div class="week-label">Alcohol: plan it, do not pretend it away</div>` +
+    rows.map(r => `<div class="meal-line"><strong style="color:var(--text)">${r[0]}</strong> ${r[1]}</div>`).join('') +
+    `<div class="strip-dim" style="margin-top:8px">Approximate figures. Check the label or a food database for your own drinks.</div></div>`;
+}
+
 function buildToolHtml(n) {
   const T = TOOLS[n]; if (!T) return '';
   const d = toolData(n);
@@ -3268,15 +3344,15 @@ const WEEK_GUIDE = {
   2: {
     pill: 'Week 2: Build Your Base Meals',
     promise: 'You do not need 27 new recipes. You need a few meals that survive a Tuesday.',
-    result: 'By the end of the week you have 4 or 5 meals you like, with their numbers, and they are in the house.',
+    result: 'By the end of the week you have 4 or 5 meals you like, with their numbers, and you know what your usual carb portion really weighs.',
     why: 'Most people fall off because dinner is a daily decision with no plan. Repeat meals remove the decision.',
-    setup: ['Choose breakfast, lunch, dinner and one snack you would eat again.', 'Add real ingredients and portions. Use the sample days for numbers.', 'Add one emergency meal for when everything goes wrong.', 'Shop for them once.'],
+    setup: ['Choose breakfast, lunch, dinner and one snack you would eat again.', 'Add real ingredients and portions. Use the sample days for numbers.', 'Add one emergency meal for when everything goes wrong.', 'Weigh one usual carb portion with the second tool below and compare it with your guess.', 'Shop for them once.'],
     example: 'Worked example: Breakfast, 150g 0% Greek yogurt, 40g oats, 80g berries. About 265 kcal and 20g protein. Easier swap: a protein yogurt and a banana.',
-    core: ['Eat your base meals on at least 5 days.', 'Keep calories and protein inside your numbers.', 'Do your weekly check-in in the Progress tab.'],
+    core: ['Eat your base meals on at least 5 days.', 'Weigh one usual carb portion and record the difference.', 'Do your weekly check-in in the Progress tab.'],
     extras: ['Batch-cook one dinner.', 'Pre-portion a snack.'],
     minimum: 'Hard week? Pick one reliable breakfast and one emergency dinner. That counts.',
     checkin: [['Which meal was easiest?', 'Keep it as it is. Build the others to feel like that.'], ['Which meal failed more than once?', 'Change the meal, not yourself. Usually cost, time, hunger or portion size.'], ['Were you hungry by mid-afternoon?', 'Add protein or fibre to lunch before you cut anything.']],
-    next: 'Carry your answers into Week 3: the meal that failed is often the one that is short on protein.'
+    next: 'Carry your answers into Week 3: the meal that failed is often the one that is short on protein. Keep using the weighed carb amounts from now on.'
   },
   3: {
     pill: 'Week 3: Protein Without Announcing It',
@@ -3289,27 +3365,27 @@ const WEEK_GUIDE = {
     extras: ['Try a shake only if it makes the day easier.', 'Add a protein snack you actually like.'],
     minimum: 'Hard week? Add one protein source to one meal a day. That is still progress.',
     checkin: [['Did you hit protein on 5 or more days?', 'Yes: keep the same pattern. No: look at the one meal that falls short and fix that, not everything.'], ['Did protein push your calories over?', 'Swap, do not add. Choose leaner versions or a smaller carb portion.'], ['Were you full between meals?', 'Good sign. If not, bring the protein earlier in the day.']],
-    next: 'Next is carbs: now that protein is covered, we fit the rest around your day.'
+    next: 'Next is carby veg: now that protein is covered, we make the plate bigger without the calories.'
   },
   4: {
-    pill: 'Week 4: Carbs Without The Drama',
-    promise: 'Carbs are fuel, not a personality defect.',
-    result: 'By the end of the week you know what your usual carb portion actually weighs, and you have put carbs where they help you most.',
-    why: 'Most people have a favourite carb they under-count. It is rarely the potato. It is the amount.',
-    setup: ['Use the tool below to weigh one usual carb portion.', 'Compare the scale with what you assumed.', 'Move some carbs around your training if you train.', 'Bring back one carb you had been avoiding, inside your numbers.'],
-    example: 'Worked example: you assume 60g of dry pasta and weigh 90g. That is about 50% more, roughly 105 kcal. Not a crime, but now you know.',
-    core: ['Weigh one usual carb portion and record the difference.', 'Stay inside your calorie range on at least 5 days.', 'Do your weekly check-in in the Progress tab.'],
-    extras: ['Put the biggest carb meal before or after training.', 'Try a new carb.'],
-    minimum: 'Hard week? Weigh one carb, once. That is the lesson.',
-    checkin: [['How was your energy and hunger on training days?', 'If low or hungry, move a carb nearer the session before cutting calories.'], ['Was the scale different from your guess?', 'If higher, use the weighed number from now on. If lower, you have a little more room.'], ['Did you avoid a carb out of fear?', 'Bring it back inside your numbers. Precise timing is not a compulsory fat-loss trick.']],
-    next: 'Next is real life: everything so far works at home, now it has to work out of the house.'
+    pill: 'Week 4: Carby Veg For Volume',
+    promise: 'A fuller plate for fewer calories.',
+    result: 'By the end of the week you have swapped part of your usual carb for carby veg at least three times, and you know it still feels like a proper meal.',
+    why: 'Potatoes, squash, peas and carrots fill the plate and the stomach for fewer calories than rice or pasta. You keep the carbs and add volume.',
+    setup: ['Pick one carb meal you eat often.', 'Use the tool below to choose a carby veg to swap in for part of it.', 'Keep your protein the same.', 'Move some carbs around your training if you train.'],
+    example: 'Worked example: swap 100g of cooked rice (about 130 kcal) for 150g of butternut squash (about 68 kcal). The plate looks bigger and you save about 60 kcal.',
+    core: ['Swap part of a carb for carby veg at least 3 times.', 'Stay inside your calorie range on at least 5 days.', 'Do your weekly check-in in the Progress tab.'],
+    extras: ['Put the biggest carb meal before or after training.', 'Try a carby veg you have never cooked.'],
+    minimum: 'Hard week? Do one swap, once. That is the lesson.',
+    checkin: [['How was your energy and hunger on training days?', 'If low or hungry, move a carb nearer the session before cutting calories.'], ['Did the swaps leave you full?', 'If yes, keep them. If not, swap less of the carb and add more veg on the side.'], ['Did you still enjoy the meals?', 'Keep the swaps you like and drop the ones you do not. Nothing here is compulsory.']],
+    next: 'Next is real life: everything so far works at home, now it has to work out of the house, including drinks.'
   },
   5: {
     pill: 'Week 5: Navigate Real Life',
     promise: 'A restaurant is not a restart.',
     result: 'By the end of the week you have a plan for one real event and you have compared your plan with what happened.',
     why: 'The plan usually breaks at weekends, drinks and eating out. A plan made in advance beats willpower at the table.',
-    setup: ['Pick one actual event this week.', 'Look at the menu before you go and choose your meal.', 'Decide your drinks: how many and when you stop.', 'Decide your next meal afterwards.'],
+    setup: ['Pick one actual event this week.', 'Look at the menu before you go and choose your meal.', 'Decide your drinks: how many, what, and when you stop. Read the alcohol card below.', 'Decide your next meal afterwards.'],
     example: 'Worked example: Saturday dinner. Chicken and a side salad, share a dessert, two glasses of wine, normal breakfast the next morning.',
     core: ['Plan one real event in advance.', 'Have one planned treat. No guilt, no restart.', 'Do your weekly check-in in the Progress tab.'],
     extras: ['Plan the whole weekend.', 'Try a lighter swap you like.'],
@@ -3393,6 +3469,8 @@ function buildWeekNow() {
   let html = `<div class="week-card" style="border-color:rgba(201,168,76,0.3)"><div class="week-label">What you leave with</div><div class="week-title">${g.result}</div><div class="week-desc">${g.why}</div></div>`;
   html += `<div class="week-card"><div class="week-label">Set up (do this first)</div>` + g.setup.map(s => `<div class="meal-line">• ${s}</div>`).join('') + `<div class="strip-dim" style="margin-top:8px">${g.example}</div></div>`;
   html += buildToolHtml(view);
+  if (view === 2) html += buildToolHtml(8);
+  if (view === 5) html += alcoholCardHtml();
   html += `<div class="week-card"><div class="week-label">Three core actions</div><div id="wk-core"></div><div class="week-label" style="margin-top:12px">Optional extras</div>` + g.extras.map(s => `<div class="meal-line">• ${s}</div>`).join('') + `</div>`;
   html += `<div class="strip"><strong style="color:var(--text);display:block;margin-bottom:4px">Minimum version</strong>${g.minimum}</div>`;
   html += `<div class="week-card"><div class="week-label">End-of-week check-in: what your answers mean</div>` + g.checkin.map(c => `<div class="meal-line"><strong style="color:var(--text)">${c[0]}</strong><br>${c[1]}</div>`).join('') + `<button class="cta-outline" style="margin-top:10px" onclick="showTab('progress')">Open my check-in →</button></div>`;
